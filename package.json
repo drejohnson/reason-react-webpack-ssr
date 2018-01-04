@@ -1,0 +1,52 @@
+{
+  "name": "with-reason-webpack",
+  "version": "0.1.0",
+  "scripts": {
+    "build:client:dev": "webpack --mode development",
+    "build:client": "webpack --mode production",
+    "build:server:dev": "webpack --config webpack.server.js --mode development",
+    "build:server": "webpack --config webpack.server.js --mode production",
+    "build:dev": "bsb -make-world && yarn build:client:dev && yarn build:server:dev",
+    "build": "bsb -make-world && yarn build:client && yarn build:server",
+    "start": "node dist/server",
+    "predev": "bsb -clean-world | yarn build:dev",
+    "dev": "concurrently \"bsb -make-world -w\" \"node dist/server\"",
+    "clean": "bsb -clean-world",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "webpack-cli": "webpack-cli"
+  },
+  "keywords": [
+    "BuckleScript"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^4.0.0",
+    "express": "^4.16.2",
+    "helmet": "^3.9.0",
+    "history": "^4.7.2",
+    "morgan": "^1.9.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-helmet": "^5.2.0",
+    "reason-react": ">=0.3.0",
+    "universal-router": "^5.0.0"
+  },
+  "devDependencies": {
+    "bs-chalk": "^0.1.1",
+    "bs-express": "^0.0.6",
+    "bs-platform": "^2.1.0",
+    "concurrently": "^3.5.1",
+    "copy-webpack-plugin": "^4.3.1",
+    "file-loader": "^1.1.6",
+    "react-hot-loader": "^3.1.3",
+    "url-loader": "^0.6.2",
+    "webpack": "^4.0.0-alpha.2",
+    "webpack-cli": "^2.0.1",
+    "webpack-common-shake": "^1.5.3",
+    "webpack-dev-middleware": "^2.0.3",
+    "webpack-hot-middleware": "^2.21.0",
+    "webpack-manifest-plugin": "^1.3.2",
+    "webpack-node-externals": "^1.6.0"
+  }
+}

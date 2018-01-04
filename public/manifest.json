@@ -1,0 +1,26 @@
+{
+  "dir": "ltr",
+  "lang": "en",
+  "name": "ReasonReact Parcel",
+  "scope": "/",
+  "display": "standalone",
+  "start_url": "/",
+  "short_name": "ReasonReact",
+  "theme_color": "#111111",
+  "description": "",
+  "orientation": "any",
+  "background_color": "#212529",
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "icons": [{
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-256x256.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    }
+  ]
+}
