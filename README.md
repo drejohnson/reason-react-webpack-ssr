@@ -24,4 +24,4 @@
 
 * [ ] Fix Workbox (It breaks routing)
 * [ ] Add "CSS-In-Reason" library. Either [bs-css](https://github.com/SentiaAnalytics/bs-css) or [bs-react-fela](https://github.com/astrada/bs-react-fela).
-* [ ] Add (React-Loadable)[https://github.com/thejameskyle/react-loadable]. Code-Splitting components ...fuck yeah!
+* [ ] Add [React-Loadable](https://github.com/thejameskyle/react-loadable). Code-Splitting components ...fuck yeah!
