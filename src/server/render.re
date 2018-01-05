@@ -32,8 +32,8 @@ let view =
         You need to enable JavaScript to run this app.
       </noscript>
       <div id="root">$(html)</div>
-      <script src=$(vendor_bundle) defer></script>
-      <script src=$(app_bundle) defer></script>
+      <script src="/$(vendor_bundle)" defer></script>
+      <script src="/$(app_bundle)" defer></script>
     </body>
   </html>
 |j};
