@@ -38,7 +38,7 @@ let start = () => {
   useOnPath(
     app,
     ~path="/",
-    Express.Static.make("static", Express.Static.defaultOptions()) |> Express.Static.asMiddleware
+    Express.Static.make("public", Express.Static.defaultOptions()) |> Express.Static.asMiddleware
   );
   get(app, ~path="*", Middleware.App.make());
   listen(app, ~port=Config.Server.port, ~onListen, ())
