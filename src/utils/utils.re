@@ -2,6 +2,8 @@ type dom;
 
 type element;
 
+[@bs.val] external window : 'a = "window";
+
 [@bs.val] external dom : dom = "document";
 
 [@bs.send] external getElementById : (dom, string) => element = "getElementById";

@@ -21,6 +21,7 @@
   "namespace": true,
   "bs-dependencies": [
     "reason-react",
+    "reason-apollo",
     "bs-express",
     "bs-chalk"
   ],

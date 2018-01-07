@@ -11,6 +11,7 @@ let globalStyles = {j|
 let view =
     (
       html,
+      state,
       helmetHtmlAttributes,
       helmetTitle,
       helmetMeta,

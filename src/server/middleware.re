@@ -28,33 +28,33 @@ module App = {
         |> UniversalRouter.resolve({"pathname": Express.Request.path(req)})
         |> Js.Promise.then_(
              (component) => {
-               let html = ReactDOMServerRe.renderToString(<App> component </App>);
-               let helmet = ReactHelmet.renderStatic();
-               let helmetHtmlAttributes = helmet##htmlAttributes##toString();
-               let helmetTitle = helmet##title##toString();
-               let helmetMeta = helmet##meta##toString();
-               let helmetLink = helmet##link##toString();
-               let helmetScript = helmet##script##toString();
-               let render = () =>
-                 Express.Response.sendString(
-                   res,
-                   Render.view(
-                     html,
-                     helmetHtmlAttributes,
-                     helmetTitle,
-                     helmetMeta,
-                     helmetLink,
-                     helmetScript,
-                     app_bundle,
-                     vendor_bundle
-                   )
+               let html =
+                 ReactDOMServerRe.renderToString(
+                   <App> component </App>
                  );
-               render() |> Js.Promise.resolve
-             }
-           )
-      }
-    );
-};                      )
+               ReactApollo.getDataFromTree(html)
+               |> Js.Promise.then_(
+                    () => {
+                      let helmet = ReactHelmet.renderStatic();
+                      let helmetHtmlAttributes = helmet##htmlAttributes##toString();
+                      let helmetTitle = helmet##title##toString();
+                      let helmetMeta = helmet##meta##toString();
+                      let helmetLink = helmet##link##toString();
+                      let helmetScript = helmet##script##toString();
+                      let state = Apollo.initialState;
+                      Express.Response.sendString(
+                        res,
+                        Render.view(
+                          html,
+                          state,
+                          helmetHtmlAttributes,
+                          helmetTitle,
+                          helmetMeta,
+                          helmetLink,
+                          helmetScript,
+                          app_bundle,
+                          vendor_bundle
+                        )
                       )
                       |> Js.Promise.resolve
                     }

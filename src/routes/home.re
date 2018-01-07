@@ -7,5 +7,6 @@ let make = (~redirect, _children) => {
       <a onClick=(redirect("/"))> ("Home" |> Utils.text) </a>
       <a onClick=(redirect("/about"))> ("About" |> Utils.text) </a>
       <Hello message="Hello from home component" />
+      <QueryEpisodes />
     </div>
 };

@@ -26,8 +26,8 @@ let start = () => {
   Config.Server.isDev ? use(app, morgan("dev")) : use(app, morgan("combined"));
   use(app, helmet());
   if (Config.Server.isDev) {
-    use(app, Webpack.webpackDevMiddleware);
-    use(app, Webpack.webpackHotMiddleware)
+    use(app, Middleware.Webpack.webpackDevMiddleware);
+    use(app, Middleware.Webpack.webpackHotMiddleware)
   };
   useOnPath(
     app,
