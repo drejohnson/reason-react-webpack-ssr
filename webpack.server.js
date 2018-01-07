@@ -7,6 +7,7 @@ const config = require('./config')
 const isPROD = process.env.NODE_ENV === 'production'
 
 module.exports = {
+  mode: process.env.NODE_ENV || 'development',
   name: 'server',
   target: 'node',
   node: {

@@ -7,6 +7,7 @@ const config = require('./config')
 const isPROD = process.env.NODE_ENV === 'production'
 
 const client = {
+  mode: process.env.NODE_ENV || 'development',
   name: 'client',
   cache: true,
   entry: {
@@ -14,7 +15,7 @@ const client = {
       ? config.resolveApp('src/client.bs.js')
       : [
         'react-hot-loader/patch',
-        `webpack-hot-middleware/client?reload=true`,
+        `webpack-hot-middleware/client?noInfo=true`,
         config.resolveApp('src/client.bs.js')
       ]
   },
