@@ -40,6 +40,12 @@ let start = () => {
     ~path="/",
     Express.Static.make("public", Express.Static.defaultOptions()) |> Express.Static.asMiddleware
   );
+  useOnPath(
+    app,
+    ~path="/static",
+    Express.Static.make("dist/static", Express.Static.defaultOptions())
+    |> Express.Static.asMiddleware
+  );
   get(app, ~path="*", Middleware.App.make());
   listen(app, ~port=Config.Server.port, ~onListen, ())
 };
