@@ -19,11 +19,10 @@
 * Use install dependencies: `yarn`
 * For dev mode without ssr run `yarn dev` or `npm run dev`, open browser, the app should be running at: http://localhost:8080.
 * To build run: `yarn build` or `npm run build`
-* To build and run use: `yarn build` or `npm run build` followed by `yarn start` or `npm start`. (**For production prepend NODE_ENV=production**)
+* To build and run use: `yarn build` or `npm run build` followed by `yarn start` or `npm start`.
 
 ## TODO
 
-* [ ] **Fix Production build (getting mime type errors on js files)**
 * [ ] Fix Workbox (It breaks routing)
 * [ ] Add "CSS-In-Reason" library. Either [bs-css](https://github.com/SentiaAnalytics/bs-css) or [bs-react-fela](https://github.com/astrada/bs-react-fela).
 * [ ] Add [React-Loadable](https://github.com/thejameskyle/react-loadable). Code-Splitting components ...fuck yeah!
