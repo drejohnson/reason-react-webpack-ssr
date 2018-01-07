@@ -54,4 +54,29 @@ module App = {
            )
       }
     );
+};                      )
+                      )
+                      |> Js.Promise.resolve
+                    }
+                  )
+             }
+           )
+      }
+    );
+};
+
+module Webpack = {
+  type compiler;
+  [@bs.module] external webpack : Js.Json.t => compiler = "webpack";
+  [@bs.module]
+  external devMiddleware :
+    (compiler, {. "logLevel": string, "serverSideRender": bool, "stats": string}) => 'a =
+    "webpack-dev-middleware";
+  [@bs.module] external hotMiddleware : compiler => 'a = "webpack-hot-middleware";
+  [@bs.module] external config : Js.Json.t = "../../../../webpack.config";
+  let config = config;
+  let compiler = webpack(config);
+  let webpackDevMiddleware =
+    devMiddleware(compiler, {"logLevel": "error", "serverSideRender": true, "stats": "minimal"});
+  let webpackHotMiddleware = hotMiddleware(compiler);
 };
