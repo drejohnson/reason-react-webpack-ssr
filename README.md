@@ -11,6 +11,7 @@
 * [x] SSR - Server side rendering
 * [x] [Webpack - v4.0.0-alpha*](https://webpack.js.org/)
 * [x] [Universal Router](https://github.com/kriasoft/universal-router) *(Waiting for Reason Router solution)
+* [x] [Reason-Apollo](https://github.com/apollographql/reason-apollo)
 * [x] [React Helmet](https://github.com/nfl/react-helmet) bindings
 
 ## Quick start
