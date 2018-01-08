@@ -28,34 +28,31 @@ module App = {
         |> UniversalRouter.resolve({"pathname": Express.Request.path(req)})
         |> Js.Promise.then_(
              (component) => {
-               let html =
-                 ReactDOMServerRe.renderToString(
-                   <App> component </App>
-                 );
+               let html = ReactDOMServerRe.renderToString(<App> component </App>);
                ReactApollo.getDataFromTree(html)
                |> Js.Promise.then_(
                     () => {
                       let helmet = ReactHelmet.renderStatic();
-                      let helmetHtmlAttributes = helmet##htmlAttributes##toString();
-                      let helmetTitle = helmet##title##toString();
-                      let helmetMeta = helmet##meta##toString();
-                      let helmetLink = helmet##link##toString();
-                      let helmetScript = helmet##script##toString();
-                      let state = Apollo.initialState;
-                      Express.Response.sendString(
-                        res,
-                        Render.view(
-                          html,
-                          state,
-                          helmetHtmlAttributes,
-                          helmetTitle,
-                          helmetMeta,
-                          helmetLink,
-                          helmetScript,
-                          app_bundle,
+                      let helmetHtmlAttributes = helmet##htmlAttributes##toComponent();
+                      let helmetTitle = helmet##title##toComponent();
+                      let helmetMeta = helmet##meta##toComponent();
+                      let helmetLink = helmet##link##toComponent();
+                      let helmetScript = helmet##script##toComponent();
+                      let state = Js.Obj.empty();
+                      let markup =
+                        <Html
+                          html
+                          state
+                          helmetHtmlAttributes
+                          helmetTitle
+                          helmetMeta
+                          helmetLink
+                          helmetScript
+                          app_bundle
                           vendor_bundle
-                        )
-                      )
+                        />;
+                      let renderApp = ReactDOMServerRe.renderToStaticMarkup(markup);
+                      Express.Response.sendString(res, {j|<!doctype html>$renderApp|j})
                       |> Js.Promise.resolve
                     }
                   )
