@@ -1,7 +1,3 @@
-/*
-   Pass the configuration to the Apollo Client
-   You can now use `FetchTodos` as a JSX tag
- */
 module FetchEpisodes = Apollo.Client.Query(QueryEpisodesConfig);
 
 let component = ReasonReact.statelessComponent("App");

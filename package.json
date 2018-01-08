@@ -33,7 +33,7 @@
     "react-apollo": "^2.0.4",
     "react-dom": "^16.2.0",
     "react-helmet": "^5.2.0",
-    "reason-apollo": "https://github.com/apollographql/reason-apollo.git#feature/static-passed-in-module",
+    "reason-apollo": "https://github.com/drejohnson/reason-apollo.git#make-apollo-client-configurable",
     "reason-react": ">=0.3.0",
     "universal-router": "^5.0.0"
   },

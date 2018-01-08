@@ -3949,9 +3949,9 @@ readdirp@^2.0.0:
     readable-stream "^2.0.2"
     set-immediate-shim "^1.0.1"
 
-"reason-apollo@https://github.com/apollographql/reason-apollo.git#feature/static-passed-in-module":
-  version "0.5.6"
-  resolved "https://github.com/apollographql/reason-apollo.git#36df4a367abf7bb712623996bef0ff3bcacb0907"
+"reason-apollo@https://github.com/drejohnson/reason-apollo.git#make-apollo-client-configurable":
+  version "0.5.7"
+  resolved "https://github.com/drejohnson/reason-apollo.git#a17a22351dbe08502a009b8a2860984ac536f932"
 
 reason-react@>=0.3.0:
   version "0.3.0"
