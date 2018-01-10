@@ -19,6 +19,20 @@ module.exports = {
     filename: 'index.js',
     libraryTarget: 'commonjs2'
   },
+  module: {
+    rules: [
+      {
+        exclude: /node_modules/,
+        test: /\.js$/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            cacheDirectory: true
+          }
+        }
+      }
+    ]
+  },
   plugins: [
     new webpack.DefinePlugin({
       APP_BUNDLE: JSON.stringify(

@@ -25,6 +25,20 @@ const client = {
     chunkFilename: `static/js/[name]${isPROD ? '.[chunkhash:8]' : ''}.js`,
     publicPath: '/'
   },
+  module: {
+    rules: [
+      {
+        exclude: /node_modules/,
+        test: /\.js$/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            cacheDirectory: true,
+          },
+        },
+      }
+    ]
+  },
   plugins: [
     ...(isPROD ? [] : [new webpack.HotModuleReplacementPlugin()]),
     new ManifestPlugin({

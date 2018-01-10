@@ -36,11 +36,14 @@
     "react-apollo": "^2.0.4",
     "react-dom": "^16.2.0",
     "react-helmet": "^5.2.0",
+    "react-loadable": "^5.3.1",
     "reason-apollo": "https://github.com/drejohnson/reason-apollo.git#make-apollo-client-configurable",
     "reason-react": ">=0.3.1",
     "universal-router": "^5.0.0"
   },
   "devDependencies": {
+    "babel-loader": "^7.1.2",
+    "babel-plugin-dynamic-import-node": "^1.2.0",
     "bs-chalk": "^0.1.1",
     "bs-express": "^0.0.6",
     "bs-platform": "^2.1.0",
