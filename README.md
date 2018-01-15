@@ -21,8 +21,11 @@
 * To build run: `yarn build` or `npm run build`
 * To build and run use: `yarn build` or `npm run build` followed by `yarn start` or `npm start`.
 
+**Check out the [ReasonReact-Router](https://github.com/drejohnson/reason-webpack-ssr/tree/reason-react-router) branch**
+
 ## TODO
 
 * [ ] Fix Workbox (It breaks routing)
 * [ ] Add "CSS-In-Reason" library. Either [bs-css](https://github.com/SentiaAnalytics/bs-css) or [bs-react-fela](https://github.com/astrada/bs-react-fela).
 * [ ] Add [React-Loadable](https://github.com/thejameskyle/react-loadable). Code-Splitting components ...fuck yeah!
+* [ ] Use [Razzle](https://github.com/jaredpalmer/razzle) for SSR + Code-Splitting?
