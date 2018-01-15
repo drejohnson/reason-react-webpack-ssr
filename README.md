@@ -1,8 +1,10 @@
 # Reason Parcel SSR
 
-> A basic starting point for building universal web apps with ReasonReact bundled with Parcel.
+> A basic starting point for building universal web apps with ReasonReact.
 
-> Far from refined. Used as a basis to learn ReasonML and POC for server side rendering with ReasonReact and Parcel
+> Far from refined. Used as a basis to learn ReasonML and POC for server side rendering with ReasonReact
+
+> **Check out the [ReasonReact-Router](https://github.com/drejohnson/reason-webpack-ssr/tree/reason-react-router) branch**
 
 ## Features
 
@@ -20,8 +22,6 @@
 * For dev mode without ssr run `yarn dev` or `npm run dev`, open browser, the app should be running at: http://localhost:8080.
 * To build run: `yarn build` or `npm run build`
 * To build and run use: `yarn build` or `npm run build` followed by `yarn start` or `npm start`.
-
-**Check out the [ReasonReact-Router](https://github.com/drejohnson/reason-webpack-ssr/tree/reason-react-router) branch**
 
 ## TODO
 
