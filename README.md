@@ -1,4 +1,4 @@
-# Reason Parcel SSR
+# ReasonReact + Apollo + SSR
 
 > A basic starting point for building universal web apps with ReasonReact.
 
