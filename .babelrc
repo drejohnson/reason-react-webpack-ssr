@@ -1,7 +1,0 @@
-{
-  "presets": [],
-  "plugins": [
-    "dynamic-import-node",
-    "react-loadable/babel"
-  ]
-}

@@ -1,62 +1,56 @@
-type asyncMiddleware =
-  (Express.Request.t, Express.Response.t, Express.Next.t) => Js.Promise.t(Express.done_);
-
-external asyncMiddlewareFrom : asyncMiddleware => Express.Middleware.t = "%identity";
-
 [@bs.val] external app_bundle : string = "APP_BUNDLE";
 
 [@bs.val] external vendor_bundle : string = "VENDOR_BUNDLE";
 
 module Status = {
   let make = () =>
-    asyncMiddlewareFrom(
-      (_req, res, _next) => Express.Response.sendString(res, "works") |> Js.Promise.resolve
+    Express.PromiseMiddleware.from(
+      (_next, _req, res) => Express.Response.sendString("works", res) |> Js.Promise.resolve
     );
 };
 
-module App = {
+module RenderApp = {
   let make = () =>
-    asyncMiddlewareFrom(
-      (req, res, _next) => {
-        let dispatcher = (target, event) => {
-          let history = History.createBrowserHistory();
-          ReactEventRe.Mouse.preventDefault(event);
-          history##push(target)
-        };
-        let universalRouter = UniversalRouter.serverRouter(Routes.handlers(dispatcher));
-        universalRouter
-        |> UniversalRouter.resolve({"pathname": Express.Request.path(req)})
+    Express.PromiseMiddleware.from(
+      (_next, req, res) => {
+        let helmetContext = Js.Obj.empty();
+        let path = req |> Express.Request.path;
+        let app =
+          <ReactHelmet.Provider context=helmetContext>
+            <App initialUrl=path />
+          </ReactHelmet.Provider>;
+        LoadableComponents.getLoadableState(app)
         |> Js.Promise.then_(
-             (component) => {
-               let html = ReactDOMServerRe.renderToString(<App> component </App>);
-               ReactApollo.getDataFromTree(html)
+             (loadableState) =>
+               ReactApollo.getDataFromTree(app)
                |> Js.Promise.then_(
-                    () => {
-                      let helmet = ReactHelmet.renderStatic();
-                      let helmetHtmlAttributes = helmet##htmlAttributes##toComponent();
-                      let helmetTitle = helmet##title##toComponent();
-                      let helmetMeta = helmet##meta##toComponent();
-                      let helmetLink = helmet##link##toComponent();
-                      let helmetScript = helmet##script##toComponent();
-                      let state = Js.Obj.empty();
-                      let markup =
-                        <Html
-                          html
-                          state
-                          helmetHtmlAttributes
-                          helmetTitle
-                          helmetMeta
-                          helmetLink
-                          helmetScript
-                          app_bundle
-                          vendor_bundle
-                        />;
-                      let renderApp = ReactDOMServerRe.renderToStaticMarkup(markup);
-                      Express.Response.sendString(res, {j|<!doctype html>$renderApp|j})
+                    () =>
+                      {
+                        let title = helmetContext##helmet##title##toString();
+                        let meta = helmetContext##helmet##meta##toString();
+                        let link = helmetContext##helmet##link##toString();
+                        let script = helmetContext##helmet##script##toString();
+                        let htmlAttr = helmetContext##helmet##htmlAttributes##toString();
+                        let loadableScript = loadableState |> LoadableComponents.getScriptTag;
+                        let content = ReactDOMServerRe.renderToString(app);
+                        Express.Response.sendString(
+                          Template.make(
+                            ~content,
+                            ~title,
+                            ~meta,
+                            ~link,
+                            ~script,
+                            ~htmlAttr,
+                            ~app_bundle,
+                            ~vendor_bundle,
+                            ~loadableScript,
+                            ()
+                          ),
+                          res
+                        )
+                      }
                       |> Js.Promise.resolve
-                    }
                   )
-             }
            )
       }
     );

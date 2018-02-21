@@ -19,6 +19,9 @@
 .bsb.lock
 *.bs.js
 
+# graphql_ppx
+graphql_schema.json
+
 # misc
 .DS_Store
 .env

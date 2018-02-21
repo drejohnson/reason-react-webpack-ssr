@@ -1,3 +1,31 @@
-let history = History.createBrowserHistory();
+[@bs.val] [@bs.module "react-dom"]
+external hydrate : (ReasonReact.reactElement, Dom.element) => unit =
+  "hydrate";
 
-AppShell.bootstrap(history) |> AppShell.onLocationChange(history##location);
+[@bs.val] [@bs.return nullable] external _getElementById : string => option(Dom.element) =
+  "document.getElementById";
+
+let hydrateToElementWithId = (reactElement, id) =>
+  switch (_getElementById(id)) {
+  | None =>
+    raise(
+      Invalid_argument(
+        "ReactDOMRE.renderToElementWithId : no element of id " ++ id ++ " found in the HTML."
+      )
+    )
+  | Some(element) => hydrate(reactElement, element)
+  };
+
+LoadableComponents.loadComponents()
+|> Js.Promise.then_(
+     () =>
+       hydrateToElementWithId(
+         <ReactHelmet.Provider context=Js.Nullable.undefined> <App /> </ReactHelmet.Provider>,
+         "root"
+       )
+       |> Js.Promise.resolve
+   );
+/* hydrateToElementWithId(
+     <ReactHelmet.Provider context=Js.Nullable.undefined> <App /> </ReactHelmet.Provider>,
+     "root"
+   ); */

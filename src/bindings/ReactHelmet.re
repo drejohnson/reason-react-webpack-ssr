@@ -18,11 +18,7 @@ type style;
 
 type titleAttributes;
 
-[@bs.module "react-helmet"] external helmet : ReasonReact.reactClass = "Helmet";
-
-[@bs.val] [@bs.scope "Helmet"] [@bs.module "react-helmet"]
-external renderStatic : unit => Js.t('a) =
-  "renderStatic";
+[@bs.module "react-helmet-async"] external helmet : ReasonReact.reactClass = "default";
 
 let make =
     (
@@ -59,4 +55,15 @@ let make =
     "titleTemplate": Js.Nullable.from_opt(titleTemplate)
   };
   ReasonReact.wrapJsForReason(~reactClass=helmet, ~props, children)
+};
+
+module Provider = {
+  [@bs.module "react-helmet-async"] external helmet_provider : ReasonReact.reactClass =
+    "HelmetProvider";
+  let make = (~context, children) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass=helmet_provider,
+      ~props={"context": context},
+      children
+    );
 };
