@@ -211,7 +211,6 @@ async function start() {
         server: 'src/server.bs.js',
         middleware: [server],
         port: 8080,
-        reload: true,
         open: !process.argv.includes('--silent'),
         ...(isDev ? {} : { notify: false, ui: false })
       },
