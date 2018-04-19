@@ -1,54 +1,52 @@
 [@bs.val] external window : Dom.window = "window";
 
-[@bs.scope "window"] [@bs.val] external window_location : string = "location";
-
-[@bs.scope ("window", "location")] [@bs.val] external window_location_pathname : string =
-  "pathname";
-
-[@bs.val] [@bs.return nullable] external _getElementById : string => option(Dom.element) =
-  "document.getElementById";
-
 [@bs.val] external requireAssetURI : string => string = "require";
-
-[@bs.val] external nodeEnv : string = "process.env.NODE_ENV";
 
 [@bs.val] external parseInt : (string, int) => int = "";
 
-[@bs.val] external hot : bool = "module.hot";
+[@bs.val] external moduleHot : 'a = "module.hot";
 
-[@bs.val] external accept : unit => unit = "module.hot.accept";
+[@bs.send.pipe: 't] external accept : unit = "";
+
+[@bs.scope "window"] [@bs.val] external apollo_state : 'a = "__APOLLO_STATE__";
+
+[@bs.set]
+external set_apollo_state : (Dom.window, string) => unit = "__APOLLO_STATE__";
 
 let parseInt_ = (int, string) => parseInt(string, int);
-
-let isPROD = nodeEnv === "production";
-
-let isDEV = nodeEnv !== "production";
 
 let isBrowser = Js.typeof(window: Dom.window) !== "undefined";
 
 let isNode = Js.typeof(window: Dom.window) === "undefined";
 
+/* Copied from Vrroom */
 module Text = {
   let string = ReasonReact.stringToElement;
-  let int = (n) => n |> string_of_int |> string;
-  let float = (f) => f |> string_of_float |> string;
-  let any = (v) => v |> Js.String.make |> string;
+  let int = n => n |> string_of_int |> string;
+  let float = f => f |> string_of_float |> string;
+  let any = v => v |> Js.String.make |> string;
 };
 
 let text = Text.string;
 
-let list = (list) => list |> Array.of_list |> ReasonReact.arrayToElement;
+/* Array to List helper */
+let list = list => list |> Array.of_list |> ReasonReact.arrayToElement;
 
-let array = (array) => array |> ReasonReact.arrayToElement;
+/* Array to Element helper */
+let array = array => array |> ReasonReact.arrayToElement;
 
-/**
-  * Safely converts an object to json by stringifying it and parsing the results.
-  */
-let objToJson = (obj: Js.t('a)) : Js.Json.t => {
-  let str = Js.Json.stringifyAny(obj);
-  /* parseExn should be safe because the string came from stringifyAny */
-  switch str {
-  | Some(str) => str |> Js.Json.parseExn
-  | None => Js.Json.null
-  }
-};
+let parseUrlPath = url =>
+  switch (url) {
+  | ""
+  | "/" => []
+  | _ =>
+    /* remove the preceeding /, which every pathname seems to have */
+    let raw = Js.String.sliceToEnd(~from=1, url);
+    /* remove the trailing /, which some pathnames might have. Ugh */
+    let raw =
+      switch (Js.String.get(raw, Js.String.length(raw) - 1)) {
+      | "/" => Js.String.slice(~from=0, ~to_=-1, raw)
+      | _ => raw
+      };
+    raw |> Js.String.split("/") |> Array.to_list;
+  };

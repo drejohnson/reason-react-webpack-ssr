@@ -18,7 +18,11 @@ type style;
 
 type titleAttributes;
 
-[@bs.module "react-helmet-async"] external helmet : ReasonReact.reactClass = "default";
+[@bs.module "react-helmet"]
+external helmet : ReasonReact.reactClass = "Helmet";
+
+[@bs.val] [@bs.scope "Helmet"] [@bs.module "react-helmet"]
+external renderStatic : unit => Js.t('a) = "renderStatic";
 
 let make =
     (
@@ -30,40 +34,29 @@ let make =
       ~link: option(array(link))=?,
       ~meta: option(array(meta))=?,
       ~noscript: option(array(noscript))=?,
-      ~onChangeClientState: option(((~newState: t) => t))=?,
+      ~onChangeClientState: option((~newState: t) => t)=?,
       ~script: option(array(script))=?,
       ~style: option(array(style))=?,
       ~title: option(string)=?,
       ~titleAttributes: option(titleAttributes)=?,
       ~titleTemplate: option(string)=?,
-      children
+      children,
     ) => {
   let props = {
-    "base": Js.Nullable.from_opt(base),
-    "bodyAttributes": Js.Nullable.from_opt(bodyAttributes),
-    "defaultTitle": Js.Nullable.from_opt(defaultTitle),
-    "encodeSpecialCharacters": Js.Boolean.to_js_boolean(encodeSpecialCharacters),
-    "htmlAttributes": Js.Nullable.from_opt(htmlAttributes),
-    "link": Js.Nullable.from_opt(link),
-    "meta": Js.Nullable.from_opt(meta),
-    "noscript": Js.Nullable.from_opt(noscript),
-    "onChangeClientState": Js.Nullable.from_opt(onChangeClientState),
-    "script": Js.Nullable.from_opt(script),
-    "style": Js.Nullable.from_opt(style),
-    "title": Js.Nullable.from_opt(title),
-    "titleAttributes": Js.Nullable.from_opt(titleAttributes),
-    "titleTemplate": Js.Nullable.from_opt(titleTemplate)
+    "base": Js.Nullable.fromOption(base),
+    "bodyAttributes": Js.Nullable.fromOption(bodyAttributes),
+    "defaultTitle": Js.Nullable.fromOption(defaultTitle),
+    "encodeSpecialCharacters": encodeSpecialCharacters,
+    "htmlAttributes": Js.Nullable.fromOption(htmlAttributes),
+    "link": Js.Nullable.fromOption(link),
+    "meta": Js.Nullable.fromOption(meta),
+    "noscript": Js.Nullable.fromOption(noscript),
+    "onChangeClientState": Js.Nullable.fromOption(onChangeClientState),
+    "script": Js.Nullable.fromOption(script),
+    "style": Js.Nullable.fromOption(style),
+    "title": Js.Nullable.fromOption(title),
+    "titleAttributes": Js.Nullable.fromOption(titleAttributes),
+    "titleTemplate": Js.Nullable.fromOption(titleTemplate),
   };
-  ReasonReact.wrapJsForReason(~reactClass=helmet, ~props, children)
-};
-
-module Provider = {
-  [@bs.module "react-helmet-async"] external helmet_provider : ReasonReact.reactClass =
-    "HelmetProvider";
-  let make = (~context, children) =>
-    ReasonReact.wrapJsForReason(
-      ~reactClass=helmet_provider,
-      ~props={"context": context},
-      children
-    );
+  ReasonReact.wrapJsForReason(~reactClass=helmet, ~props, children);
 };

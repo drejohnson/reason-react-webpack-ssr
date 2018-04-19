@@ -1,24 +1,36 @@
 {
-  "name": "reasonreact-ssr",
+  "name": "reason-react-starter-kit",
   "version": "0.1.0",
-  "sources": [{
-    "dir": "src",
-    "subdirs": true
-  }],
-  "package-specs": [{
-    "module": "commonjs"
-  }, {
-    "module": "es6",
-    "in-source": true
-  }],
+  "sources": [
+    {
+      "dir": "src",
+      "subdirs": true
+    }
+  ],
+  "package-specs": [
+    {
+      "module": "commonjs"
+    },
+    {
+      "module": "es6-global",
+      "in-source": true
+    }
+  ],
   "suffix": ".bs.js",
   "bs-dependencies": [
+    "@glennsl/bs-json",
+    "bs-css",
+    "bs-dynamic-import",
+    "bs-express",
     "reason-react",
-    "bs-express"
+    "reason-apollo",
+    "reason-loadable"
   ],
   "namespace": true,
   "refmt": 3,
   "reason": {
     "react-jsx": 2
-  }
+  },
+  "bsc-flags": ["-bs-super-errors"],
+  "ppx-flags": ["graphql_ppx/ppx"]
 }
