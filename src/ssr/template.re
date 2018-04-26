@@ -13,10 +13,12 @@ let make =
   let initialState = Js.Json.stringify(state);
   let apolloState = {j|<script>window.__APOLLO_STATE__ = $initialState</script>|j};
   let scripts =
-    Js.Array.(
+    Belt.Array.(
       chunks
-      |> map(chunk => {j|<script key=$chunk src=$chunk></script>|j})
-      |> joinWith(" ")
+      |> mapWithIndex(_, (i, chunk) =>
+           {j|<script key=$i src=$chunk></script>|j}
+         )
+      |> Js.Array.joinWith(" ")
     );
   {j|
     <!DOCTYPE html>
