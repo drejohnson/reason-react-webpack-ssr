@@ -22,6 +22,7 @@
     "bs-css",
     "bs-dynamic-import",
     "bs-express",
+    "bs-node-ext",
     "reason-react",
     "reason-apollo",
     "reason-loadable"

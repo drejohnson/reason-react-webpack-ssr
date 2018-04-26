@@ -17,7 +17,7 @@
     "get-schema": "yarn send-introspection-query http://localhost:4000/"
   },
   "dependencies": {
-    "@glennsl/bs-json": "^1.3.1",
+    "@glennsl/bs-json": "^1.3.2",
     "apollo-cache-inmemory": "^1.1.12",
     "apollo-client": "^2.2.8",
     "apollo-link": "^1.2.2",
@@ -27,6 +27,7 @@
     "bs-css": "^6.6.0",
     "bs-dynamic-import": "^0.3.0",
     "bs-express": "^0.7.0",
+    "bs-node-ext": "^0.2.0",
     "express": "^4.16.3",
     "graphql": "^0.13.2",
     "graphql-tag": "^2.8.0",
@@ -35,18 +36,18 @@
     "react-apollo": "^2.1.3",
     "react-dom": "^16.3.2",
     "react-helmet": "^5.2.0",
-    "reason-apollo":
-      "https://github.com/apollographql/reason-apollo.git#feature/react-apollo-2.1",
+    "react-helmet-async": "^0.0.5",
+    "reason-apollo": "^0.7.2-beta",
     "reason-loadable": "^0.4.0",
-    "reason-react": "^0.3.4"
+    "reason-react": "^0.4.0"
   },
   "devDependencies": {
-    "browser-sync": "^2.23.6",
+    "browser-sync": "^2.23.7",
     "bs-platform": "^3.0.0",
     "chokidar": "^2.0.3",
     "concurrently": "^3.5.1",
-    "dotenv": "^5.0.0",
-    "esm": "^3.0.19",
+    "dotenv": "^5.0.1",
+    "esm": "^3.0.27",
     "fs-extra": "^5.0.0",
     "glob": "^7.1.2",
     "graphql_ppx": "^0.2.1",
@@ -55,16 +56,15 @@
     "react-dev-utils": "^5.0.1",
     "react-error-overlay": "^4.0.0",
     "rimraf": "^2.6.2",
-    "source-map-support": "^0.5.4",
+    "source-map-support": "^0.5.5",
     "webpack": "^4.6.0",
     "webpack-assets-manifest": "^3.0.1",
     "webpack-bundle-analyzer": "^2.11.1",
-    "webpack-cli": "^2.0.14",
-    "webpack-dev-middleware": "^3.1.2",
+    "webpack-cli": "^2.0.15",
+    "webpack-dev-middleware": "^3.1.3",
     "webpack-dev-server": "^3.1.3",
     "webpack-hot-middleware": "^2.22.1",
     "webpack-node-externals": "^1.7.2",
-    "webpack-serve": "^0.3.1",
     "webpackbar": "^2.6.1"
   }
 }
