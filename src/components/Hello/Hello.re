@@ -32,8 +32,8 @@ let make = (~name, _children) => {
       <div className=(Css.style(styles##hello))>
         <Query variables=helloQuery##variables>
           ...(
-               ({data}) =>
-                 switch (data) {
+               ({result}) =>
+                 switch (result) {
                  | NoData => "No Data" |> Utils.text
                  | Error(_) => "Something Went Wrong" |> Utils.text
                  | Loading => <Placeholder />
