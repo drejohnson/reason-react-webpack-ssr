@@ -21,7 +21,7 @@ let isNode = Js.typeof(window: Dom.window) === "undefined";
 
 /* Copied from Vrroom */
 module Text = {
-  let string = ReasonReact.stringToElement;
+  let string = ReasonReact.string;
   let int = n => n |> string_of_int |> string;
   let float = f => f |> string_of_float |> string;
   let any = v => v |> Js.String.make |> string;
@@ -29,11 +29,23 @@ module Text = {
 
 let text = Text.string;
 
-/* Array to List helper */
-let list = list => list |> Array.of_list |> ReasonReact.arrayToElement;
+/* List to Array helper */
+let list = list => list |> Belt.List.toArray |> ReasonReact.array;
 
 /* Array to Element helper */
-let array = array => array |> ReasonReact.arrayToElement;
+let array = array => array |> ReasonReact.array;
+
+let joinArray = (delimiter: string, items: array(string)) : string => {
+  let result =
+    Belt.Array.reduce(items, "", (acc: string, item: string) =>
+      (acc ++ delimiter ++ item: string)
+    );
+  String.sub(
+    result,
+    String.length(delimiter),
+    String.length(result) - String.length(delimiter),
+  );
+};
 
 let parseUrlPath = url =>
   switch (url) {

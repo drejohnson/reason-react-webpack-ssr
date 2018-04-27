@@ -18,7 +18,7 @@ let make =
       |> mapWithIndex(_, (i, chunk) =>
            {j|<script key=$i src=$chunk></script>|j}
          )
-      |> Js.Array.joinWith(" ")
+      |> Utils.joinArray(" ")
     );
   {j|
     <!DOCTYPE html>
